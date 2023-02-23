@@ -137,7 +137,7 @@ mainMenuPlayButton.anchor.set(0.5);
 mainMenuPlayButton.x = app.renderer.width / 2;
 mainMenuPlayButton.y = app.renderer.height / 2;
 
-mainMenuScene.addChild(mainMenuPlayButton);
+mainMenu.addChild(mainMenuPlayButton);
 
 // Listen for button click events
 mainMenuPlayButton.on("click", () => {
