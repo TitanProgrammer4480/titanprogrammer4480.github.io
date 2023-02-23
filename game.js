@@ -84,7 +84,7 @@ app.ticker.add(() => {
 });
 
 // Load the button texture
-const buttonTexture = PIXI.Texture.from("images/button.png");
+const buttonTexture = PIXI.Texture.from("images/main_menu_button.");
 
 // Create the button sprite
 const button = new PIXI.Sprite(buttonTexture);
