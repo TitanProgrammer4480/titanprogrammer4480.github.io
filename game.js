@@ -83,20 +83,32 @@ app.ticker.add(() => {
     }
 });
 
-// Load the button texture
-const buttonTexture = PIXI.Texture.from("images/main_menu_button.");
+// Create the red button
+const button = new PIXI.Container();
+button.interactive = true;
+button.buttonMode = true;
 
-// Create the button sprite
-const button = new PIXI.Sprite(buttonTexture);
+const buttonBackground = new PIXI.Graphics();
+buttonBackground.beginFill(0xff0000);
+buttonBackground.drawRect(0, 0, 100, 50);
+buttonBackground.endFill();
 
-// Set the button sprite's initial position and scale
-button.anchor.set(0, 0);
-button.x = 10;
-button.y = 10;
-button.scale.set(0.5);
+const buttonText = new PIXI.Text("Main Menu", {fontSize: 18, fill: 0xffffff});
+buttonText.anchor.set(0.5);
+buttonText.position.set(50, 25);
 
-// Add the button sprite to the stage
+button.addChild(buttonBackground, buttonText);
 app.stage.addChild(button);
+
+// Move the button to the upper left corner
+button.position.set(10, 10);
+
+// Listen for button click events
+button.on("click", () => {
+    // Remove the game scene and add the main menu scene
+    app.stage.removeChild(gameScene);
+    app.stage.addChild(mainMenuScene);
+});
 
 // Create the main menu screen
 const mainMenu = new PIXI.Container();
@@ -123,4 +135,13 @@ mainMenu.addChild(mainMenuTitle);
 const mainMenuPlayButton = new PIXI.Text("Play", {fontSize: 24, fill: 0xffffff});
 mainMenuPlayButton.anchor.set(0.5);
 mainMenuPlayButton.x = app.renderer.width / 2;
-mainMenuPlayButton.y = app.renderer.height / 2 +
+mainMenuPlayButton.y = app.renderer.height / 2;
+
+mainMenuScene.addChild(mainMenuPlayButton);
+
+// Listen for button click events
+mainMenuPlayButton.on("click", () => {
+    // Remove the main menu scene and add the game scene
+    app.stage.removeChild(mainMenuScene);
+    app.stage.addChild(gameScene);
+});
